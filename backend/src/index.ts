@@ -7,7 +7,16 @@ let receiverSocket: WebSocket | null = null;
 
 wss.on('connection', (ws: WebSocket) => {
   ws.on('error', (error) => {
-    console.log(error);
+    console.log('Websocket error:', error);
+  });
+
+  ws.on('close', () => {
+    if (ws === senderSocket) {
+      senderSocket = null;
+    }
+    if (ws === receiverSocket) {
+      receiverSocket = null;
+    }
   });
 
   ws.on('message', (data: RawData) => {
