@@ -43,9 +43,9 @@ wss.on('connection', (ws: WebSocket) => {
 
     if (parsedPayload.type === 'ice-candidate') {
       if (ws === senderSocket) {
-        senderSocket?.send(JSON.stringify(parsedPayload));
-      } else if (ws === receiverSocket) {
         receiverSocket?.send(JSON.stringify(parsedPayload));
+      } else if (ws === receiverSocket) {
+        senderSocket?.send(JSON.stringify(parsedPayload));
       }
     }
   });
